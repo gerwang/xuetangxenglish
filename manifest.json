@@ -1,0 +1,16 @@
+{
+	"name":"xuetangx.com AP00008X Universal Academic English crack",
+	"manifest_version":2,
+	"version":"1.0",
+	"description":"通用学术英语自动化脚本",
+	"browser_action": {
+		"default_icon":"icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches":["http://www.xuetangx.com/courses/course-v1:TsinghuaX+AP000008X+2017T1/courseware/*"],
+			"js":["script.js"]
+		}
+	]
+}
+
