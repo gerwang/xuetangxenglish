@@ -237,4 +237,6 @@ function addLoadEvent(func) {
 }
 
 console.log("script started");
-play_video();
+setTimeout(function() {
+	play_video();
+},5000);
