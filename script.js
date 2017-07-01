@@ -213,10 +213,10 @@ function open_nextChapter() {
 
 function play_video() {
     var video = document.getElementsByTagName("video")[0];
-	while(video.readyState!==4) {
-		setTimeout(play_video,1000);
-		return;
-	}
+    if (!video || video.readyState !== 4) {
+        setTimeout(play_video, 1000);
+        return;
+    }
     video.play();
     console.log("video is playing");
     video.onended = function (s) {
