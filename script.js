@@ -132,6 +132,9 @@ Unit 8
     console.log("now we are at Chapter " + currentChapter + ", Unit " + currentUnit);
 
     var problem = document.getElementsByClassName("problem")[0];
+    if (!problem) {
+        return; // in case there is no problem
+    }
     var choicegroup = problem.getElementsByClassName("choicegroup capa_inputtype");
 
     var ChapterStart = answer_str.indexOf("Unit " + currentChapter);
