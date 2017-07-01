@@ -4,19 +4,19 @@
 
 1. 打开chrome浏览器，打开**扩展程序**页面。
 
-![](step1.png)
+![](./pics/step1.png)
 
 2. 点击**加载已解压的扩展程序**
 
-   ![](step2.png)
+   ![](./pics/step2.png)
 
 3. 选中文件夹并点击确定
 
-![](step3.png)
+![](./pics/step3.png)
 
 4. chrome扩展栏中出现如图的图标，表示安装成功。
 
-![](step4.png)
+![](./pics/step4.png)
 
 ## 使用
 
