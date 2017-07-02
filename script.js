@@ -147,7 +147,7 @@ Unit 8
         while (true) {
             curPos++;
             var ch = answer_str.charCodeAt(curPos);
-            if (ch >= 65 && ch <= 65 + 4) {
+            if (ch >= 65 && ch <= 65 + 7) {// there is a choice 'G'
                 inputs[ch - 65].checked = true;
                 console.log("Problem " + (i + 1) + ": " + String.fromCharCode(ch));
                 break;
