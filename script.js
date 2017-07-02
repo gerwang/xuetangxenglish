@@ -224,8 +224,24 @@ function play_video() {
     console.log("video is playing");
     video.onended = function (s) {
         console.log("video ended");
-        answer_problems();
-        open_next();
+        var orderlist = document.getElementById("sequence-list");
+        var arr_li = orderlist.getElementsByTagName("li");
+        var index = 0;
+        while (true) {
+            var link = arr_li[index].getElementsByTagName("a")[0];
+            if (link.getAttribute("aria-selected")) {
+                break;
+            }
+            index++;
+        }
+        if (index === arr_li.length - 1) {
+            answer_problems();
+            open_next();
+        } else {
+            var next_link = arr_li[index + 1].getElementsByTagName("a")[0];
+            next_link.click();
+            setTimeout(play_video, 500);
+        }
     }
 }
 
