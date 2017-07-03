@@ -231,11 +231,8 @@ function open_nextChapter() {
     }
 }
 
-let curPos;
-
 function completeFinalTest() {
     console.log("now we are at final test!");
-    curPos = answer_str.indexOf("Final Test");
     completePage();
 }
 
@@ -252,10 +249,35 @@ function addClickEvent(btn, func) {
         }
     }
 }
+const numberOfProblem = [50, 20, 4, 4, 3, 4];
 
 function completePage() {
     const problem = document.getElementsByClassName("problem")[0];
     const choicegroup = problem.getElementsByClassName("choicegroup capa_inputtype");
+
+    const orderlist = document.getElementById("sequence-list");
+    const arr_li = orderlist.getElementsByTagName("li");
+    let index = 0;
+    while (true) {
+        const link = arr_li[index].getElementsByTagName("a")[0];
+        if (link.getAttribute("aria-selected")) {
+            break;
+        }
+        index++;
+    }
+
+    let curPos = answer_str.indexOf("Final Test");
+    for (let i = 0; i < index; i++) {
+        for (let j = 0; j < numberOfProblem[i]; j++) {
+            while (true) {
+                curPos++;
+                const ch = answer_str.charCodeAt(curPos);
+                if (ch >= 65 && ch <= 65 + 7) {// there is a choice 'G'
+                    break;
+                }
+            }
+        }
+    }
 
     for (let i = 0; i < choicegroup.length; i++) {
         const current_problem = choicegroup[i];
@@ -271,8 +293,10 @@ function completePage() {
         }
     }
     const submit_btn = document.getElementsByClassName("check 最终提交")[0];
-    alert("Final test 只能提交一次！请确认无误后手动点击最终提交");
-    addClickEvent(submit_btn, openNextTab);
+    alert("Final test 只能提交一次！请确认无误后手动点击最终提交,点击最终提交后页面会自动跳转");
+    addClickEvent(submit_btn, function () {
+        setTimeout(openNextTab, 1000);
+    });
     //submit_btn.click();
 }
 
