@@ -203,7 +203,7 @@
       <workItem from="1498912401403" duration="156000" />
       <workItem from="1498919507668" duration="55000" />
       <workItem from="1498956302210" duration="1769000" />
-      <workItem from="1499055657890" duration="5141000" />
+      <workItem from="1499055657890" duration="5694000" />
     </task>
     <task id="LOCAL-00001" summary="add final test:warning! final test can be submitted only once!">
       <created>1499059438776</created>
@@ -216,10 +216,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18174000" />
+    <option name="totallyTimeSpent" value="18727000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
