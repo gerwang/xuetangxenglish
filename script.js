@@ -2,9 +2,7 @@
  * Created by Gerwa on 2017/7/1.
  */
 
-function answer_problems() {
-
-    const answer_str = `n+e和他的小伙伴 v2.0
+const answer_str = `n+e和他的小伙伴 v3.0
 
 Unit 1
 1. ADBDB
@@ -95,58 +93,77 @@ Unit 8
 7. EDEBA
 8. ABDAE ACBD
 9. ABCDB ACA
+
+Final Test
+
+Part 1
+CBAAC BCCBD ABAAD BAADA CDACB
+BDACD ACADB ADBAD CCBAC BDBCD
+
+Part 2,3
+BCABD DBCCA DCCAA DABDB CCBAC
+BADBC DCDAB
 `;
 
-    var currentUnit = null;
+function getCurrentUnitandChapter() {
+    let index;
+    let currentUnit;
     {
-        var opened_chapter = document.getElementsByClassName("chapter is-open")[0];
-        var ul = opened_chapter.getElementsByTagName("ul")[0];
-        var list = ul.getElementsByTagName("li");
-        var active_li = ul.getElementsByClassName("active graded")[0];
+        const opened_chapter = document.getElementsByClassName("chapter is-open")[0];
+        const ul = opened_chapter.getElementsByTagName("ul")[0];
+        const list = ul.getElementsByTagName("li");
+        const active_li = ul.getElementsByClassName("active graded")[0];
 
-        var index = 0;
+        index = 0;
         while (list[index] !== active_li) {
             index++;
         }
         currentUnit = index + 1;
     }
 
-    var currentChapter = null;
+    let currentChapter;
     {
-        var navs = document.getElementsByTagName("nav");
-        var nav = null;
-        for (var i = 0; i < navs.length; i++) {
+        const navs = document.getElementsByTagName("nav");
+        let nav = null;
+        for (let i = 0; i < navs.length; i++) {
             if (navs[i].getAttribute("aria-label") === "课程导航") {
                 nav = navs[i];
                 break;
             }
         }
-        var divs = nav.getElementsByTagName("div");
+        const divs = nav.getElementsByTagName("div");
 
-        var index = 0;
+        index = 0;
         while (divs[index].getAttribute("class") !== "chapter is-open") {
             index++;
         }
         currentChapter = index; //有个线下课程一章
     }
+    return [currentUnit, currentChapter];
+}
+
+function answer_problems() {
+
+    let currentUnit, currentChapter;
+    [currentUnit, currentChapter] = getCurrentUnitandChapter();
+
     console.log("now we are at Chapter " + currentChapter + ", Unit " + currentUnit);
 
-    var problem = document.getElementsByClassName("problem")[0];
+    let problem = document.getElementsByClassName("problem")[0];
     if (!problem) {
         return; // in case there is no problem
     }
-    var choicegroup = problem.getElementsByClassName("choicegroup capa_inputtype");
+    const choicegroup = problem.getElementsByClassName("choicegroup capa_inputtype");
 
-    var ChapterStart = answer_str.indexOf("Unit " + currentChapter);
-    var UnitStart = answer_str.indexOf(currentUnit + ".", ChapterStart);
-    var curPos = UnitStart;
+    const ChapterStart = answer_str.indexOf("Unit " + currentChapter);
+    let curPos = answer_str.indexOf(currentUnit + ".", ChapterStart);
 
-    for (var i = 0; i < choicegroup.length; i++) {
-        var current_problem = choicegroup[i];
-        var inputs = current_problem.getElementsByTagName("input");
+    for (let i = 0; i < choicegroup.length; i++) {
+        const current_problem = choicegroup[i];
+        const inputs = current_problem.getElementsByTagName("input");
         while (true) {
             curPos++;
-            var ch = answer_str.charCodeAt(curPos);
+            const ch = answer_str.charCodeAt(curPos);
             if (ch >= 65 && ch <= 65 + 7) {// there is a choice 'G'
                 inputs[ch - 65].checked = true;
                 console.log("Problem " + (i + 1) + ": " + String.fromCharCode(ch));
@@ -154,18 +171,18 @@ Unit 8
             }
         }
     }
-    var submit_btn = document.getElementsByClassName("check 提交")[0];
+    const submit_btn = document.getElementsByClassName("check 提交")[0];
     submit_btn.click();
 }
 
 
 function open_next() {
-    var opened_chapter = document.getElementsByClassName("chapter is-open")[0];
-    var ul = opened_chapter.getElementsByTagName("ul")[0];
-    var list = ul.getElementsByTagName("li");
-    var active_li = ul.getElementsByClassName("active graded")[0];
+    const opened_chapter = document.getElementsByClassName("chapter is-open")[0];
+    const ul = opened_chapter.getElementsByTagName("ul")[0];
+    const list = ul.getElementsByTagName("li");
+    let active_li = ul.getElementsByClassName("active graded")[0];
 
-    var index = 0;
+    let index = 0;
     while (list[index] !== active_li) {
         index++;
     }
@@ -174,26 +191,26 @@ function open_next() {
         console.log("this is the last unit!");
         open_nextChapter();
     } else {
-        var next = list[index + 1];
+        let next = list[index + 1];
         console.log(typeof active_li);
         console.log(typeof next);
-        var nextA = next.getElementsByTagName("a")[0];
+        const nextA = next.getElementsByTagName("a")[0];
         nextA.click();
     }
 }
 
 function open_nextChapter() {
-    var navs = document.getElementsByTagName("nav");
-    var nav = null;
-    for (var i = 0; i < navs.length; i++) {
-        if (navs[i].getAttribute("aria-label") === "课程导航") {
-            nav = navs[i];
+    const Navs = document.getElementsByTagName("nav");
+    let nav = null;
+    for (let i = 0; i < Navs.length; i++) {
+        if (Navs[i].getAttribute("aria-label") === "课程导航") {
+            nav = Navs[i];
             break;
         }
     }
-    var divs = nav.getElementsByTagName("div");
+    const divs = nav.getElementsByTagName("div");
 
-    var index = 0;
+    let index = 0;
     while (divs[index].getAttribute("class") !== "chapter is-open") {
         index++;
     }
@@ -201,34 +218,109 @@ function open_nextChapter() {
     if (index === divs.length) {
         console.log("This is the last chapter!");
     } else {
-        var nextChapter = divs[index + 1];
-        var nextChapterh3 = nextChapter.getElementsByTagName("h3")[0];
-        var nextChapterA = nextChapterh3.getElementsByTagName("a")[0];
+        const nextChapter = divs[index + 1];
+        const nextChapterh3 = nextChapter.getElementsByTagName("h3")[0];
+        const nextChapterA = nextChapterh3.getElementsByTagName("a")[0];
         nextChapterA.click();
 
 
-        var ul = nextChapter.getElementsByTagName("ul")[0];
-        var firstLi = ul.getElementsByTagName("li")[0];
-        var nextA = firstLi.getElementsByTagName("a")[0];
+        const ul = nextChapter.getElementsByTagName("ul")[0];
+        const firstLi = ul.getElementsByTagName("li")[0];
+        const nextA = firstLi.getElementsByTagName("a")[0];
         nextA.click();
     }
 }
 
+let curPos;
+
+function completeFinalTest() {
+    console.log("now we are at final test!");
+    curPos = answer_str.indexOf("Final Test");
+    completePage();
+}
+
+function addClickEvent(btn, func) {
+    const oldonload = btn.onclick;
+    if (typeof btn.onclick !== 'function') {
+        btn.onclick = func;
+    } else {
+        btn.onclick = function () {
+            if (oldonload) {
+                oldonload();
+            }
+            func();
+        }
+    }
+}
+
+function completePage() {
+    const problem = document.getElementsByClassName("problem")[0];
+    const choicegroup = problem.getElementsByClassName("choicegroup capa_inputtype");
+
+    for (let i = 0; i < choicegroup.length; i++) {
+        const current_problem = choicegroup[i];
+        const inputs = current_problem.getElementsByTagName("input");
+        while (true) {
+            curPos++;
+            const ch = answer_str.charCodeAt(curPos);
+            if (ch >= 65 && ch <= 65 + 7) {// there is a choice 'G'
+                inputs[ch - 65].checked = true;
+                console.log("Problem " + (i + 1) + ": " + String.fromCharCode(ch));
+                break;
+            }
+        }
+    }
+    const submit_btn = document.getElementsByClassName("check 最终提交")[0];
+    alert("Final test 只能提交一次！请确认无误后手动点击最终提交");
+    addClickEvent(submit_btn, openNextTab);
+    //submit_btn.click();
+}
+
+function openNextTab() {
+    const orderlist = document.getElementById("sequence-list");
+    const arr_li = orderlist.getElementsByTagName("li");
+    let index = 0;
+    while (true) {
+        const link = arr_li[index].getElementsByTagName("a")[0];
+        if (link.getAttribute("aria-selected")) {
+            break;
+        }
+        index++;
+    }
+    if (index === arr_li.length - 1) {
+        console.log("Final test complete!");
+    } else {
+        const next_link = arr_li[index + 1].getElementsByTagName("a")[0];
+        next_link.click();
+        setTimeout(completePage, 500);
+    }
+}
+
+let failure = 0;
+
 function play_video() {
-    var video = document.getElementsByTagName("video")[0];
+    let video = document.getElementsByTagName("video")[0];
     if (!video || video.readyState !== 4) {
-        setTimeout(play_video, 1000);
+        if (++failure > 10) {
+            let currentUnit, currentChapter;
+            [currentUnit, currentChapter] = getCurrentUnitandChapter();
+            if (currentChapter === 9) {
+                completeFinalTest();
+                return;
+            }
+        }
+        setTimeout(play_video, 100);
         return;
     }
     video.play();
     console.log("video is playing");
-    video.onended = function (s) {
+    video.onended = function () {
         console.log("video ended");
-        var orderlist = document.getElementById("sequence-list");
-        var arr_li = orderlist.getElementsByTagName("li");
-        var index = 0;
+        const orderlist = document.getElementById("sequence-list");
+        const arr_li = orderlist.getElementsByTagName("li");
+        let index = 0;
         while (true) {
-            var link = arr_li[index].getElementsByTagName("a")[0];
+            const link = arr_li[index].getElementsByTagName("a")[0];
             if (link.getAttribute("aria-selected")) {
                 break;
             }
@@ -238,23 +330,9 @@ function play_video() {
             answer_problems();
             open_next();
         } else {
-            var next_link = arr_li[index + 1].getElementsByTagName("a")[0];
+            const next_link = arr_li[index + 1].getElementsByTagName("a")[0];
             next_link.click();
             setTimeout(play_video, 500);
-        }
-    }
-}
-
-function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    } else {
-        window.onload = function () {
-            if (oldonload) {
-                oldonload();
-            }
-            func();
         }
     }
 }
